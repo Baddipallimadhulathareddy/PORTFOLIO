@@ -158,13 +158,42 @@ nav a:hover{
     overflow:hidden;
 }
 
-.video-section video{
-    width:100%;
+.hero-animation{
+    position:absolute;
+    top:0;
+    right:0;
+    width:60%;
     height:100%;
-    display:block;
-    object-fit:cover;
-    object-position:top center;
+    z-index:1;
+    overflow:visible;
 }
+.hero-animation svg{ width:100%; height:100%; overflow:visible; }
+.hero-animation g{ transform-box:fill-box; transform-origin:center; }
+.hero-animation .parallax, .hero-animation .motion{ will-change:transform; }
+
+@keyframes fY1{ 0%,100%{transform:translateY(0px);} 50%{transform:translateY(-16px);} }
+@keyframes fY2{ 0%,100%{transform:translateY(0px);} 50%{transform:translateY(14px);} }
+@keyframes fY3{ 0%,100%{transform:translateY(0px);} 50%{transform:translateY(-10px);} }
+@keyframes fX1{ 0%,100%{transform:translateX(0px);} 50%{transform:translateX(13px);} }
+@keyframes fX2{ 0%,100%{transform:translateX(0px);} 50%{transform:translateX(-12px);} }
+@keyframes tiltA{ 0%,100%{transform:rotate(0deg);} 50%{transform:rotate(2.6deg);} }
+@keyframes tiltB{ 0%,100%{transform:rotate(0deg);} 50%{transform:rotate(-3.2deg);} }
+@keyframes glowBreath{ 0%,100%{opacity:0.55;} 50%{opacity:1;} }
+@keyframes twinkle{ 0%,100%{opacity:0.25; transform:scale(0.7);} 50%{opacity:1; transform:scale(1.15);} }
+@keyframes driftSlow{ 0%,100%{transform:translate(0px,0px);} 50%{transform:translate(10px,-8px);} }
+
+.m-crystal{ animation: fY1 9s ease-in-out infinite, tiltA 13s ease-in-out infinite; }
+.m-prismA{ animation: fY2 8s ease-in-out infinite, fX1 11s ease-in-out infinite; }
+.m-prismB{ animation: fX2 9.5s ease-in-out infinite, tiltB 12s ease-in-out infinite; }
+.m-shardA{ animation: fY3 6.5s ease-in-out infinite, tiltB 8.5s ease-in-out infinite; }
+.m-shardB{ animation: fY1 7.4s ease-in-out infinite, tiltA 10s ease-in-out infinite; }
+.m-ribbon{ animation: driftSlow 10s ease-in-out infinite; }
+.m-mesh{ animation: glowBreath 6s ease-in-out infinite; }
+.m-node{ animation: fY2 5.5s ease-in-out infinite, glowBreath 3.4s ease-in-out infinite; }
+.m-node2{ animation: fX1 6.2s ease-in-out infinite, glowBreath 4s ease-in-out infinite; }
+.m-node3{ animation: fY3 4.8s ease-in-out infinite, glowBreath 3.8s ease-in-out infinite; }
+.m-sparkle{ animation: twinkle 3.2s ease-in-out infinite; }
+.m-particle{ animation: fY1 4.4s ease-in-out infinite, glowBreath 3s ease-in-out infinite; }
 /*================ HERO CONTENT ================*/
 
 .hero-content{
@@ -2956,9 +2985,121 @@ nav a:hover{
 
 <section class="video-section" id="home">
 
-    <video autoplay muted loop playsinline>
-        <source src="assets/home.mp4" type="video/mp4">
-    </video>
+    <div class="hero-animation" id="heroAnimation" style="padding-top: 100px; padding-left: 100px;">
+  <svg viewBox="0 0 600 680" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="glassA" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.85"/>
+        <stop offset="55%" stop-color="#A78BFA" stop-opacity="0.45"/>
+        <stop offset="100%" stop-color="#7C3AED" stop-opacity="0.30"/>
+      </linearGradient>
+      <linearGradient id="glassB" x1="0%" y1="100%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#6D28D9" stop-opacity="0.55"/>
+        <stop offset="100%" stop-color="#A78BFA" stop-opacity="0.15"/>
+      </linearGradient>
+      <linearGradient id="glassC" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.8"/>
+        <stop offset="100%" stop-color="#7C3AED" stop-opacity="0.25"/>
+      </linearGradient>
+      <linearGradient id="ribbonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#6D28D9" stop-opacity="0.05"/>
+        <stop offset="35%" stop-color="#7C3AED" stop-opacity="0.55"/>
+        <stop offset="70%" stop-color="#A78BFA" stop-opacity="0.55"/>
+        <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.05"/>
+      </linearGradient>
+      <linearGradient id="blobGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#A78BFA" stop-opacity="0.35"/>
+        <stop offset="100%" stop-color="#6D28D9" stop-opacity="0.0"/>
+      </linearGradient>
+      <filter id="softBlur" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="26"/></filter>
+      <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+        <feGaussianBlur stdDeviation="3.2" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+      <filter id="glowStrong" x="-100%" y="-100%" width="300%" height="300%">
+        <feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+      </filter>
+    </defs>
+
+    <g filter="url(#softBlur)" opacity="0.8">
+      <path d="M120,90 C220,40 340,70 380,150 C420,230 370,300 280,320 C190,340 90,290 70,210 C55,150 60,120 120,90 Z" fill="url(#blobGrad)"/>
+      <path d="M420,420 C500,390 580,430 590,500 C600,570 540,620 460,610 C380,600 340,540 350,480 C358,435 380,435 420,420 Z" fill="url(#blobGrad)"/>
+    </g>
+
+    <g class="parallax" data-depth="8">
+      <g class="motion m-mesh" stroke="#7C3AED" stroke-opacity="0.35" stroke-width="1" fill="none">
+        <polyline points="60,140 160,90 250,150 210,240 100,230 60,140"/>
+        <polyline points="160,90 250,150"/><polyline points="100,230 210,240"/>
+        <polyline points="250,150 340,120 400,190 340,260 210,240"/><polyline points="340,120 400,190"/>
+        <polyline points="60,420 140,380 220,430 180,510 90,500 60,420"/>
+        <polyline points="140,380 220,430"/><polyline points="90,500 180,510"/>
+      </g>
+    </g>
+
+    <g class="parallax" data-depth="16">
+      <path d="M50,250 C160,210 220,320 320,280 C400,250 440,180 540,200" fill="none" stroke="#A78BFA" stroke-width="1.4" stroke-opacity="0.55" stroke-dasharray="2 10" filter="url(#glow)">
+        <animate attributeName="stroke-dashoffset" from="0" to="-240" dur="7s" repeatCount="indefinite"/>
+      </path>
+    </g>
+
+    <g class="parallax" data-depth="16">
+      <g class="motion m-ribbon">
+        <path fill="url(#ribbonGrad)" opacity="0.85">
+          <animate attributeName="d" dur="9s" repeatCount="indefinite" calcMode="spline" keySplines="0.45 0 0.55 1; 0.45 0 0.55 1"
+            values="
+              M60,470 C140,430 190,500 270,470 C350,440 380,390 470,410 C500,417 520,440 500,470 C460,500 400,470 340,500 C260,540 190,560 120,520 C80,500 50,490 60,470 Z;
+              M70,460 C150,410 200,510 280,460 C355,420 385,400 480,420 C505,425 515,450 490,475 C455,505 405,480 335,510 C255,545 195,555 125,515 C85,495 55,485 70,460 Z;
+              M60,470 C140,430 190,500 270,470 C350,440 380,390 470,410 C500,417 520,440 500,470 C460,500 400,470 340,500 C260,540 190,560 120,520 C80,500 50,490 60,470 Z" />
+        </path>
+      </g>
+    </g>
+
+    <g class="parallax" data-depth="20"><g class="motion m-prismA hoverGlow">
+      <polygon points="420,60 500,110 470,190 400,175 385,110" fill="url(#glassB)" stroke="#FFFFFF" stroke-opacity="0.5" stroke-width="1"/>
+    </g></g>
+    <g class="parallax" data-depth="24"><g class="motion m-prismB hoverGlow">
+      <polygon points="70,330 140,300 175,360 140,430 80,420 50,370" fill="url(#glassC)" stroke="#FFFFFF" stroke-opacity="0.55" stroke-width="1"/>
+    </g></g>
+
+    <g class="parallax" data-depth="26"><g class="motion m-crystal hoverGlow">
+      <polygon points="330,140 300,230 340,340 420,360 470,270 440,170" fill="url(#glassA)" stroke="#FFFFFF" stroke-opacity="0.6" stroke-width="1.2"/>
+      <polygon points="330,140 440,170 400,120 360,110" fill="#FFFFFF" fill-opacity="0.35"/>
+      <polygon points="330,140 300,230 250,190 275,120" fill="url(#glassB)" stroke="#FFFFFF" stroke-opacity="0.4" stroke-width="1"/>
+      <polygon points="340,340 420,360 400,430 330,420" fill="url(#glassC)" stroke="#FFFFFF" stroke-opacity="0.4" stroke-width="1"/>
+      <polygon points="440,170 470,270 520,240 500,160" fill="url(#glassB)" stroke="#FFFFFF" stroke-opacity="0.4" stroke-width="1"/>
+      <g stroke="#FFFFFF" stroke-opacity="0.5" stroke-width="0.8" fill="none">
+        <polyline points="330,140 340,340"/><polyline points="300,230 470,270"/><polyline points="330,140 470,270"/>
+      </g>
+    </g></g>
+
+    <g class="parallax" data-depth="30"><g class="motion m-shardA hoverGlow">
+      <polygon points="500,340 545,360 520,440 480,420" fill="url(#glassA)" stroke="#FFFFFF" stroke-opacity="0.55" stroke-width="1"/>
+    </g></g>
+    <g class="parallax" data-depth="18"><g class="motion m-shardB hoverGlow">
+      <polygon points="150,540 195,520 220,590 175,610" fill="url(#glassC)" stroke="#FFFFFF" stroke-opacity="0.5" stroke-width="1"/>
+    </g></g>
+
+    <g class="parallax" data-depth="14">
+      <g stroke="#7C3AED" stroke-opacity="0.4" stroke-width="1" fill="none">
+        <polyline points="480,90 520,150 560,120"/><polyline points="520,150 500,210"/>
+      </g>
+    </g>
+    <g class="parallax" data-depth="22"><g class="motion m-node" filter="url(#glowStrong)"><polygon points="480,90 486,96 480,102 474,96" fill="#A78BFA"/></g></g>
+    <g class="parallax" data-depth="16"><g class="motion m-node2" filter="url(#glowStrong)"><polygon points="520,150 526,156 520,162 514,156" fill="#7C3AED"/></g></g>
+    <g class="parallax" data-depth="19"><g class="motion m-node3" filter="url(#glowStrong)"><polygon points="560,120 566,126 560,132 554,126" fill="#A78BFA"/></g></g>
+    <g class="parallax" data-depth="20"><g class="motion m-node" filter="url(#glowStrong)"><polygon points="500,210 506,216 500,222 494,216" fill="#6D28D9"/></g></g>
+
+    <g class="parallax" data-depth="24"><g class="motion m-sparkle" filter="url(#glow)">
+      <path d="M360,60 L364,72 L376,76 L364,80 L360,92 L356,80 L344,76 L356,72 Z" fill="#FFFFFF"/>
+    </g></g>
+    <g class="parallax" data-depth="18"><g class="motion m-sparkle" style="animation-delay:-2s" filter="url(#glow)">
+      <path d="M40,420 L43,429 L52,432 L43,435 L40,444 L37,435 L28,432 L37,429 Z" fill="#FFFFFF"/>
+    </g></g>
+
+    <g class="parallax" data-depth="16"><rect class="motion m-particle" x="380" y="470" width="5" height="5" fill="#A78BFA" filter="url(#glowStrong)" transform="rotate(45 382.5 472.5)"/></g>
+    <g class="parallax" data-depth="22"><rect class="motion m-particle" x="120" y="120" width="4" height="4" fill="#7C3AED" filter="url(#glowStrong)" style="animation-delay:-1s" transform="rotate(45 122 122)"/></g>
+    <g class="parallax" data-depth="19"><rect class="motion m-particle" x="560" y="440" width="5" height="5" fill="#6D28D9" filter="url(#glowStrong)" style="animation-delay:-2.3s" transform="rotate(45 562.5 442.5)"/></g>
+  </svg>
+</div>
     <div class="hero-content">
 
     <div class="hello-badge">
@@ -4417,6 +4558,32 @@ for(let i=0;i<45;i++){
       });
     }
   }
+})();
+</script>
+<script>
+(function(){
+  var stage = document.getElementById('heroAnimation');
+  if(!stage) return;
+  var layers = stage.querySelectorAll('.parallax');
+  var targetX=0, targetY=0, curX=0, curY=0;
+
+  stage.addEventListener('mousemove', function(e){
+    var rect = stage.getBoundingClientRect();
+    targetX = (e.clientX - rect.left) / rect.width - 0.5;
+    targetY = (e.clientY - rect.top) / rect.height - 0.5;
+  });
+  stage.addEventListener('mouseleave', function(){ targetX=0; targetY=0; });
+
+  function loop(){
+    curX += (targetX - curX) * 0.06;
+    curY += (targetY - curY) * 0.06;
+    layers.forEach(function(layer){
+      var depth = parseFloat(layer.getAttribute('data-depth')) || 10;
+      layer.style.transform = 'translate(' + (curX*depth*0.6) + 'px,' + (curY*depth*0.6) + 'px)';
+    });
+    requestAnimationFrame(loop);
+  }
+  loop();
 })();
 </script>
 </body>
